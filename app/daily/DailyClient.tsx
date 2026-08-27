@@ -36,9 +36,10 @@ type Result = {
 };
 
 export default function DailyClient({ inviteLink }: { inviteLink: string }) {
-  const [screen, setScreen] = useState<"loading" | "home" | "play" | "bonus" | "results">(
+  const [screen, setScreen] = useState<"loading" | "home" | "play" | "bonus" | "results" | "error">(
     "loading"
   );
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [dailyNumber, setDailyNumber] = useState(0);
   const [currentStreak, setCurrentStreak] = useState(0);
   const [questions, setQuestions] = useState<MCQItem[]>([]);
@@ -59,17 +60,28 @@ export default function DailyClient({ inviteLink }: { inviteLink: string }) {
 
   useEffect(() => {
     (async () => {
-      const res = await fetch("/api/daily/today");
-      const data: TodayResponse = await res.json();
-      setDailyNumber(data.dailyNumber);
-      setCurrentStreak(data.currentStreak);
-      if (data.alreadyPlayed) {
-        setResult(data.result);
-        setScreen("results");
-      } else {
-        setQuestions(data.questions);
-        setBonus(data.bonus);
-        setScreen("home");
+      try {
+        const res = await fetch("/api/daily/today");
+        const data = await res.json();
+        if (!res.ok) {
+          setLoadError(data.error || `Request failed (${res.status})`);
+          setScreen("error");
+          return;
+        }
+        const today = data as TodayResponse;
+        setDailyNumber(today.dailyNumber);
+        setCurrentStreak(today.currentStreak);
+        if (today.alreadyPlayed) {
+          setResult(today.result);
+          setScreen("results");
+        } else {
+          setQuestions(today.questions);
+          setBonus(today.bonus);
+          setScreen("home");
+        }
+      } catch (err) {
+        setLoadError(err instanceof Error ? err.message : "Couldn't reach the server.");
+        setScreen("error");
       }
     })();
   }, []);
@@ -160,6 +172,23 @@ export default function DailyClient({ inviteLink }: { inviteLink: string }) {
       <div className="card">
         <Eyebrow>LOADING</Eyebrow>
       </div>
+    );
+  }
+
+  if (screen === "error") {
+    return (
+      <>
+        <BackNav label="Home" onClick={() => (window.location.href = "/")} />
+        <div className="card">
+          <Eyebrow>SOMETHING WENT WRONG</Eyebrow>
+          <div className="feedback-tag wrong" style={{ textAlign: "left", marginTop: 6 }}>
+            {loadError}
+          </div>
+          <div className="not-scored-note" style={{ marginTop: 14 }}>
+            Check the terminal running <code>npm run dev</code> for more detail.
+          </div>
+        </div>
+      </>
     );
   }
 
