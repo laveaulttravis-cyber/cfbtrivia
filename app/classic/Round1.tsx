@@ -46,6 +46,7 @@ export default function Round1({
   }, [index]);
 
   function lockAnswer(choice: number) {
+    if (selected !== null) return; // guards against the timer firing right as a click lands
     if (intervalRef.current) clearInterval(intervalRef.current);
     setSelected(choice);
     const isCorrect = choice === q.correct;
