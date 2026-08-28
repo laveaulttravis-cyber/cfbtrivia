@@ -1,4 +1,5 @@
-// Ported directly from the reference mockup (cfb_trivia_unified_app.jsx).
+// Ported directly from the reference mockup (cfb_trivia_unified_app.jsx), updated with
+// additional questions from a later content pass.
 // Each question: { format: 'mcq', q, options[4], correct } or { format: 'typed', q, a, aliases[] }.
 export const QUESTION_BANK = {
   "_meta": {
@@ -519,6 +520,50 @@ export const QUESTION_BANK = {
             "prime time",
             "neon deion"
           ]
+        },
+        {
+          "format": "mcq",
+          "q": "This Nebraska option quarterback led the team to a share of the 1997 national title and later became Nebraska's head coach himself.",
+          "options": [
+            "Scott Frost",
+            "Tommie Frazier",
+            "Eric Crouch",
+            "Turner Gill"
+          ],
+          "correct": 0
+        },
+        {
+          "format": "mcq",
+          "q": "This Florida running back never won a Heisman but went on to become the NFL's all-time leading rusher.",
+          "options": [
+            "Emmitt Smith",
+            "Errict Rhett",
+            "Fred Taylor",
+            "Neal Anderson"
+          ],
+          "correct": 0
+        },
+        {
+          "format": "mcq",
+          "q": "This Texas running back won the 1977 Heisman Trophy.",
+          "options": [
+            "Earl Campbell",
+            "Ricky Williams",
+            "Cedric Benson",
+            "Jamaal Charles"
+          ],
+          "correct": 0
+        },
+        {
+          "format": "mcq",
+          "q": "This defensive lineman, later an NFL Hall of Famer nicknamed 'The Minister of Defense,' played at Tennessee.",
+          "options": [
+            "Reggie White",
+            "Peyton Manning",
+            "Eric Berry",
+            "Jason Witten"
+          ],
+          "correct": 0
         }
       ]
     },
@@ -961,6 +1006,39 @@ export const QUESTION_BANK = {
             "nebraska cornhuskers",
             "huskers"
           ]
+        },
+        {
+          "format": "mcq",
+          "q": "Ohio State's nickname, 'Buckeyes,' refers to what?",
+          "options": [
+            "A type of nut/tree native to Ohio",
+            "A nickname for early Ohio pioneers",
+            "A 19th-century coach",
+            "A Native American word for river"
+          ],
+          "correct": 0
+        },
+        {
+          "format": "mcq",
+          "q": "This legendarily brutal 1954 Texas A&M preseason training camp, run by a young coach who'd later become a legend at Alabama, is remembered as what?",
+          "options": [
+            "The Junction Boys",
+            "The Aggie Grind",
+            "Camp Crimson",
+            "The Bootcamp Boys"
+          ],
+          "correct": 0
+        },
+        {
+          "format": "mcq",
+          "q": "Georgia's ferocious defenses of the late 1970s and 1980s earned what collective nickname?",
+          "options": [
+            "The Junkyard Dogs",
+            "The Bulldog Brigade",
+            "The Hedges Defense",
+            "The Wrecking Crew"
+          ],
+          "correct": 0
         }
       ]
     },
@@ -1260,6 +1338,39 @@ export const QUESTION_BANK = {
           "aliases": [
             "meyer"
           ]
+        },
+        {
+          "format": "mcq",
+          "q": "This coach won a national title at Miami in 1983, just his fourth year on the job.",
+          "options": [
+            "Howard Schnellenberger",
+            "Jimmy Johnson",
+            "Dennis Erickson",
+            "Butch Davis"
+          ],
+          "correct": 0
+        },
+        {
+          "format": "mcq",
+          "q": "This coach won three national titles at USC in the late 1960s and 1970s.",
+          "options": [
+            "John McKay",
+            "John Robinson",
+            "Pete Carroll",
+            "Larry Smith"
+          ],
+          "correct": 0
+        },
+        {
+          "format": "mcq",
+          "q": "This Penn State coach spent 46 seasons leading the Nittany Lions, the longest tenure of any major-program coach in the sport.",
+          "options": [
+            "Joe Paterno",
+            "Rip Engle",
+            "James Franklin",
+            "Bill O'Brien"
+          ],
+          "correct": 0
         }
       ]
     },
@@ -2224,8 +2335,236 @@ export const QUESTION_BANK = {
           "correct": 0
         }
       ]
+    },
+    {
+      "name": "Founding & Firsts",
+      "questions": [
+        {
+          "format": "mcq",
+          "q": "The first college football game ever played, in 1869, was between Rutgers and which school?",
+          "options": [
+            "Princeton",
+            "Yale",
+            "Harvard",
+            "Columbia"
+          ],
+          "correct": 0
+        },
+        {
+          "format": "mcq",
+          "q": "In what year was the first college football game ever played?",
+          "options": [
+            "1869",
+            "1876",
+            "1880",
+            "1892"
+          ],
+          "correct": 0
+        },
+        {
+          "format": "mcq",
+          "q": "Walter Camp, often called the 'Father of American Football' for shaping its early rules, played and coached at which school?",
+          "options": [
+            "Yale",
+            "Harvard",
+            "Princeton",
+            "Penn"
+          ],
+          "correct": 0
+        },
+        {
+          "format": "mcq",
+          "q": "In what year was the forward pass legalized in college football?",
+          "options": [
+            "1906",
+            "1912",
+            "1920",
+            "1899"
+          ],
+          "correct": 0
+        },
+        {
+          "format": "mcq",
+          "q": "In what year was the Heisman Trophy first awarded?",
+          "options": [
+            "1935",
+            "1920",
+            "1945",
+            "1950"
+          ],
+          "correct": 0
+        },
+        {
+          "format": "mcq",
+          "q": "The AP Top 25 poll for college football began in which decade?",
+          "options": [
+            "1930s",
+            "1920s",
+            "1950s",
+            "1960s"
+          ],
+          "correct": 0
+        }
+      ]
+    },
+    {
+      "name": "The Playoff Era",
+      "questions": [
+        {
+          "format": "mcq",
+          "q": "The four-team College Football Playoff, which began with the 2014 season, replaced what earlier system?",
+          "options": [
+            "The BCS (Bowl Championship Series)",
+            "The AP Poll Championship",
+            "The Coaches Poll Series",
+            "The Bowl Alliance"
+          ],
+          "correct": 0
+        },
+        {
+          "format": "mcq",
+          "q": "The College Football Playoff expanded from 4 teams to how many for the 2024 season?",
+          "options": [
+            "12",
+            "8",
+            "16",
+            "10"
+          ],
+          "correct": 0
+        },
+        {
+          "format": "mcq",
+          "q": "The first-ever four-team CFP, after the 2014 season, featured Ohio State and Oregon in the title game. Which two teams lost in the semifinals?",
+          "options": [
+            "Alabama and Florida State",
+            "Alabama and TCU",
+            "Michigan State and Baylor",
+            "Georgia and Florida State"
+          ],
+          "correct": 0
+        },
+        {
+          "format": "mcq",
+          "q": "Under the 12-team CFP format introduced in 2024, how many teams receive a first-round bye?",
+          "options": [
+            "4",
+            "2",
+            "6",
+            "8"
+          ],
+          "correct": 0
+        }
+      ]
+    },
+    {
+      "name": "HBCU Football",
+      "questions": [
+        {
+          "format": "mcq",
+          "q": "Which conference, made up primarily of HBCUs, includes schools like Jackson State and Southern University?",
+          "options": [
+            "SWAC",
+            "MEAC",
+            "CIAA",
+            "SIAC"
+          ],
+          "correct": 0
+        },
+        {
+          "format": "mcq",
+          "q": "The Bayou Classic is an annual rivalry game between Grambling State and which other HBCU?",
+          "options": [
+            "Southern University",
+            "Jackson State",
+            "Alcorn State",
+            "Prairie View A&M"
+          ],
+          "correct": 0
+        },
+        {
+          "format": "mcq",
+          "q": "Deion Sanders made national headlines coaching which HBCU before moving on to Colorado?",
+          "options": [
+            "Jackson State",
+            "Grambling State",
+            "Southern University",
+            "Alabama State"
+          ],
+          "correct": 0
+        },
+        {
+          "format": "mcq",
+          "q": "Which conference, made up primarily of HBCUs along the East Coast, includes schools like Howard and North Carolina A&T?",
+          "options": [
+            "MEAC",
+            "SWAC",
+            "CIAA",
+            "Big South"
+          ],
+          "correct": 0
+        },
+        {
+          "format": "mcq",
+          "q": "Eddie Robinson coached for over 50 years and won more games than any coach in the sport at the time of his retirement \u2014 at which HBCU?",
+          "options": [
+            "Grambling State",
+            "Southern University",
+            "Jackson State",
+            "Florida A&M"
+          ],
+          "correct": 0
+        }
+      ]
+    },
+    {
+      "name": "Group of Five & Blue Turf",
+      "questions": [
+        {
+          "format": "mcq",
+          "q": "Which Group of Five program plays home games on iconic blue turf, nicknamed 'Smurf Turf'?",
+          "options": [
+            "Boise State",
+            "Fresno State",
+            "San Diego State",
+            "Nevada"
+          ],
+          "correct": 0
+        },
+        {
+          "format": "mcq",
+          "q": "Boise State's blue turf, installed in 1986, was the first non-green playing surface in college football.",
+          "options": [
+            "True",
+            "False",
+            "It was actually the second",
+            "It was originally red"
+          ],
+          "correct": 0
+        },
+        {
+          "format": "mcq",
+          "q": "Which Group of Five program made a surprise four-team CFP appearance after the 2021 season, coached by Luke Fickell?",
+          "options": [
+            "Cincinnati",
+            "UCF",
+            "Boise State",
+            "Houston"
+          ],
+          "correct": 0
+        },
+        {
+          "format": "mcq",
+          "q": "This Group of Five program went undefeated in 2017 and controversially declared itself 'national champions' despite not playing in the CFP.",
+          "options": [
+            "UCF",
+            "Boise State",
+            "Memphis",
+            "Houston"
+          ],
+          "correct": 0
+        }
+      ]
     }
   ]
 };
-
 export type TriviaQuestionBank = typeof QUESTION_BANK;
