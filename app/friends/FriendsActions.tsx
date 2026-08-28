@@ -13,7 +13,7 @@ export default function FriendsActions({ inviteLink }: { inviteLink: string }) {
   const [isPending, startTransition] = useTransition();
 
   async function copyInvite() {
-    const text = `Join me on Stump the Saturday and let's see who really knows college football: ${inviteLink}`;
+    const text = `Join me on The Tailgate and let's see who really knows college football: ${inviteLink}`;
     if (typeof navigator !== "undefined" && "share" in navigator) {
       try {
         await navigator.share({ text });

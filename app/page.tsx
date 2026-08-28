@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Flame, Trophy } from "lucide-react";
@@ -40,8 +41,16 @@ export default async function HomePage() {
     <>
       <TopNav active="home" />
       <div className="card mode-select">
+        <Image
+          src="/logo-transparent.png"
+          alt="The Tailgate"
+          width={96}
+          height={96}
+          className="brand-logo"
+          priority
+        />
         <div className="mode-title">
-          STUMP THE <span>SATURDAY</span>
+          THE <span>TAILGATE</span>
         </div>
         <div className="mode-subtitle">
           Daily trivia, friend leaderboards, and tailgate-ready showdowns.

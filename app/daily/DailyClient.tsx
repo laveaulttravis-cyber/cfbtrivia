@@ -199,7 +199,7 @@ export default function DailyClient({ inviteLink }: { inviteLink: string }) {
     if (!result) return "";
     const grid = result.correctFlags.map((c) => (c ? "🟩" : "⬛")).join("");
     const bonusStr = result.bonusCorrect ? `+${result.bonusWager}` : `-${result.bonusWager}`;
-    return `STUMP THE SATURDAY — Daily Drive #${dailyNumber}\n${grid}\n🎯 Bonus ${bonusStr}\nScore: ${result.score} · Streak: ${result.streak} 🔥\n\nThink you can beat me? ${inviteLink}`;
+    return `THE TAILGATE — Daily Drive #${dailyNumber}\n${grid}\n🎯 Bonus ${bonusStr}\nScore: ${result.score} · Streak: ${result.streak} 🔥\n\nThink you can beat me? ${inviteLink}`;
   }
 
   async function shareOrCopy() {

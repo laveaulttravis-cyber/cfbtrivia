@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import Image from "next/image";
 import { sendMagicLink } from "./actions";
 
 export default function LoginForm({
@@ -43,8 +44,16 @@ export default function LoginForm({
 
   return (
     <div className="card mode-select">
+      <Image
+        src="/logo-transparent.png"
+        alt="The Tailgate"
+        width={96}
+        height={96}
+        className="brand-logo"
+        priority
+      />
       <div className="brand-title">
-        STUMP THE <span>SATURDAY</span>
+        THE <span>TAILGATE</span>
       </div>
       <div className="brand-sub">
         Sign up with your email to save your streak, pick your school, and challenge friends.

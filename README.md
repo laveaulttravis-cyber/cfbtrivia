@@ -1,4 +1,4 @@
-# Stump the Saturday -- CFB Trivia
+# The Tailgate -- CFB Trivia
 
 Phase 1 build per `cfb_trivia_claude_code_brief.md`: Next.js (App Router) +
 Supabase, ported from the `cfb_trivia_unified_app.jsx` mockup.
