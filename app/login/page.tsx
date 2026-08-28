@@ -3,7 +3,7 @@ import LoginForm from "./LoginForm";
 export default function LoginPage({
   searchParams,
 }: {
-  searchParams: { next?: string };
+  searchParams: { next?: string; error?: string };
 }) {
-  return <LoginForm next={searchParams.next || "/"} />;
+  return <LoginForm next={searchParams.next || "/"} initialError={searchParams.error} />;
 }

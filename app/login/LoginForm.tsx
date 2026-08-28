@@ -3,10 +3,16 @@
 import { useState, useTransition } from "react";
 import { sendMagicLink } from "./actions";
 
-export default function LoginForm({ next }: { next: string }) {
+export default function LoginForm({
+  next,
+  initialError,
+}: {
+  next: string;
+  initialError?: string;
+}) {
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(initialError ?? null);
   const [isPending, startTransition] = useTransition();
 
   function submit(e: React.FormEvent) {
@@ -57,9 +63,15 @@ export default function LoginForm({ next }: { next: string }) {
         </button>
       </form>
       {error && (
-        <div className="feedback-tag wrong" style={{ marginTop: 14 }}>
-          {error}
-        </div>
+        <>
+          <div className="feedback-tag wrong" style={{ marginTop: 14 }}>
+            {error}
+          </div>
+          <div className="not-scored-note" style={{ marginTop: 6, textAlign: "center" }}>
+            Sign-in links only work once, only in the browser you requested them from, and expire
+            after an hour -- request a fresh one below if that&apos;s what happened.
+          </div>
+        </>
       )}
       <div className="not-scored-note" style={{ marginTop: 18, textAlign: "center" }}>
         No password needed -- we&apos;ll email you a one-time link. Your email is only used for
