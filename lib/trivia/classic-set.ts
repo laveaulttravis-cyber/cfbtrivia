@@ -2,6 +2,7 @@
 // Classic Solo/VS stays entirely client-side and unscored (see brief scope),
 // so this uses plain Math.random shuffling, reshuffled fresh every game.
 import { QUESTION_BANK } from "./question-bank";
+import { shuffleOptions } from "./shuffle-options";
 
 export const R1_SECONDS = 8;
 
@@ -60,7 +61,10 @@ function shuffle<T>(array: T[]): T[] {
 export function buildClassicSet(): ClassicSet {
   const r1 = shuffle(ALL_MCQ)
     .slice(0, 10)
-    .map((q) => ({ q: q.q, options: q.options, correct: q.correct }));
+    .map((q) => {
+      const { options, correct } = shuffleOptions(q.options, q.correct, shuffle);
+      return { q: q.q, options, correct };
+    });
 
   const eligible = shuffle(eligibleBoardCategories()).slice(0, 4);
   const usedTexts = new Set<string>();

@@ -4,6 +4,7 @@
 // byte-for-byte the same 6 MCQs + bonus question, and the first request of the
 // day "publishes" that set by persisting it to daily_questions.
 import { QUESTION_BANK } from "./question-bank";
+import { shuffleOptions } from "./shuffle-options";
 
 export const DAILY_EPOCH = "2026-01-01"; // Daily Drive #1
 
@@ -75,7 +76,12 @@ export function dailyNumberFor(dateStr: string): number {
 export function buildDailySet(dateStr: string): DailySet {
   const mcqSet = seededShuffle(ALL_MCQ, dateStr + "-mcq")
     .slice(0, 6)
-    .map((q) => ({ q: q.q, options: q.options, correct: q.correct }));
+    .map((q, i) => {
+      const { options, correct } = shuffleOptions(q.options, q.correct, (indices) =>
+        seededShuffle(indices, dateStr + "-opts-" + i)
+      );
+      return { q: q.q, options, correct };
+    });
   const bonusPick = seededShuffle(ALL_TYPED, dateStr + "-bonus")[0];
   return {
     questions: mcqSet,
