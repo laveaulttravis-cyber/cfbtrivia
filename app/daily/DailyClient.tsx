@@ -1,10 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Share2 } from "lucide-react";
 import { BackNav, Eyebrow } from "@/components/ui";
 import { isAnswerCorrect } from "@/lib/trivia/answer-matching";
 import type { BonusItem, MCQItem } from "@/lib/trivia/daily-set";
+
+const MAIN_SECONDS = 8;
+const BONUS_SECONDS = 12;
 
 type TodayResponse =
   | {
@@ -58,6 +61,11 @@ export default function DailyClient({ inviteLink }: { inviteLink: string }) {
   const [copied, setCopied] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
+  const [mainTimeLeft, setMainTimeLeft] = useState(MAIN_SECONDS);
+  const mainIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const [bonusTimeLeft, setBonusTimeLeft] = useState(BONUS_SECONDS);
+  const bonusIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
   useEffect(() => {
     (async () => {
       try {
@@ -86,6 +94,52 @@ export default function DailyClient({ inviteLink }: { inviteLink: string }) {
     })();
   }, []);
 
+  // 8-second-per-question timer on the main questions, matching Classic's
+  // Rapid Fire round. Auto-locks in a (wrong) answer on timeout via the same
+  // guarded answerMain used for a manual click, so a click landing right as
+  // the timer expires can't double-advance the question index.
+  useEffect(() => {
+    if (screen !== "play") return;
+    setMainTimeLeft(MAIN_SECONDS);
+    if (mainIntervalRef.current) clearInterval(mainIntervalRef.current);
+    mainIntervalRef.current = setInterval(() => {
+      setMainTimeLeft((t) => {
+        if (t <= 1) {
+          if (mainIntervalRef.current) clearInterval(mainIntervalRef.current);
+          answerMain(-1);
+          return 0;
+        }
+        return t - 1;
+      });
+    }, 1000);
+    return () => {
+      if (mainIntervalRef.current) clearInterval(mainIntervalRef.current);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [screen, qIndex]);
+
+  // 12-second timer on the bonus written answer -- auto-submits whatever's
+  // typed so far (or nothing, which just grades as wrong) when it expires.
+  useEffect(() => {
+    if (screen !== "bonus" || bonusPhase !== "question") return;
+    setBonusTimeLeft(BONUS_SECONDS);
+    if (bonusIntervalRef.current) clearInterval(bonusIntervalRef.current);
+    bonusIntervalRef.current = setInterval(() => {
+      setBonusTimeLeft((t) => {
+        if (t <= 1) {
+          if (bonusIntervalRef.current) clearInterval(bonusIntervalRef.current);
+          submitBonusGuess();
+          return 0;
+        }
+        return t - 1;
+      });
+    }, 1000);
+    return () => {
+      if (bonusIntervalRef.current) clearInterval(bonusIntervalRef.current);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [screen, bonusPhase]);
+
   function startPlay() {
     setQIndex(0);
     setSelections([]);
@@ -113,7 +167,7 @@ export default function DailyClient({ inviteLink }: { inviteLink: string }) {
   }
 
   function submitBonusGuess() {
-    if (!bonus) return;
+    if (!bonus || bonusPhase !== "question") return;
     setBonusCorrect(isAnswerCorrect(bonusGuess, bonus));
     setBonusPhase("result");
   }
@@ -205,7 +259,8 @@ export default function DailyClient({ inviteLink }: { inviteLink: string }) {
           <div className="daily-num">DAILY DRIVE #{dailyNumber}</div>
           <div className="daily-title">Today&apos;s Trivia</div>
           <div className="daily-desc">
-            {questions.length} quick questions + a wager bonus. Takes about 3 minutes.
+            {questions.length} quick questions ({MAIN_SECONDS}s each) + a wager bonus. Takes about
+            3 minutes.
           </div>
           <button className="btn btn-primary btn-lg" onClick={startPlay}>
             Play Today&apos;s Trivia
@@ -229,6 +284,9 @@ export default function DailyClient({ inviteLink }: { inviteLink: string }) {
               className={"progress-dot" + (i < qIndex ? " done" : i === qIndex ? " active" : "")}
             />
           ))}
+        </div>
+        <div className="timer-track">
+          <div className="timer-fill" style={{ width: (mainTimeLeft / MAIN_SECONDS) * 100 + "%" }} />
         </div>
         <div className="r1-question">{q.q}</div>
         <div className="mcq-grid">
@@ -273,6 +331,12 @@ export default function DailyClient({ inviteLink }: { inviteLink: string }) {
         )}
         {bonusPhase === "question" && (
           <>
+            <div className="timer-track">
+              <div
+                className="timer-fill"
+                style={{ width: (bonusTimeLeft / BONUS_SECONDS) * 100 + "%" }}
+              />
+            </div>
             <div className="r1-question">{bonus.q}</div>
             <div className="type-answer-row">
               <input
